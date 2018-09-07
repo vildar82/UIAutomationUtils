@@ -1,15 +1,16 @@
-using System.Reflection;
+﻿using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("UIAutomationUtils")]
-[assembly: AssemblyDescription("Библиотека автоматизации окон Windows.")]
+[assembly: AssemblyTitle("UIAutomationUtilsTest")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("ПИК")]
-[assembly: AssemblyProduct("UIAutomationUtils")]
-[assembly: AssemblyCopyright("Copyright ПИК ©  2018")]
+[assembly: AssemblyCompany("")]
+[assembly: AssemblyProduct("UIAutomationUtilsTest")]
+[assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -19,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("27d0b961-d6cb-43ce-909d-43ef917c9761")]
+[assembly: Guid("b7c002b0-3a72-4b0d-90e2-c2e839940ea6")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -31,7 +32,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.249.411")]
-[assembly: AssemblyFileVersion("1.0.249.411")]
-
-[assembly: AssemblyInformationalVersion("1.0.167")]
+[assembly: AssemblyVersion("1.0.249.158")]
+[assembly: AssemblyFileVersion("1.0.249.158")]
