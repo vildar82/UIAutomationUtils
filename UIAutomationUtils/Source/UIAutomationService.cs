@@ -46,11 +46,13 @@
             var uiPi = new ProcessStartInfo(UiAutoExe)
             {
                 WorkingDirectory = Path.GetDirectoryName(UiAutoExe),
-
-                // RedirectStandardOutput = true,
-                // RedirectStandardError = true,
-                UseShellExecute = false,
+#if DEBUG
+                CreateNoWindow = false,
+                UseShellExecute = true,
+#else
                 CreateNoWindow = true,
+                UseShellExecute = false,
+#endif
                 Arguments = args
             };
             var uiProcess = Process.Start(uiPi);

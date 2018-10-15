@@ -5,24 +5,16 @@
     using System.IO;
     using System.Linq;
     using System.Reflection;
-    using System.Threading;
-    using System.Windows.Automation;
+    using System.Runtime.InteropServices;
     using CommandLine;
     using Data;
     using FlaUI.Core;
     using FlaUI.Core.AutomationElements;
-    using FlaUI.Core.Conditions;
-    using FlaUI.Core.Identifiers;
-    using FlaUI.Core.Input;
     using FlaUI.UIA2;
     using FlaUI.UIA3;
     using JetBrains.Annotations;
     using NetLib;
     using NLog;
-    using ControlType = FlaUI.Core.Definitions.ControlType;
-    using Debug = System.Diagnostics.Debug;
-    using PropertyCondition = FlaUI.Core.Conditions.PropertyCondition;
-    using TreeScope = FlaUI.Core.Definitions.TreeScope;
 
     /// <summary>
     /// Class Entry Point
@@ -48,7 +40,6 @@
         {
             var curDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) ?? throw new InvalidOperationException();
             Assembly.LoadFrom(Path.Combine(curDir, "Castle.Core.dll"));
-
 #if DEBUG
             Console.WriteLine("Debug - для продолжения нажми любую кнопку");
             Console.ReadKey();
@@ -87,52 +78,11 @@
 
         internal static void Automate(UIJob uiJob)
         {
-            Console.WriteLine("Нажми любую кнопку для старта:");
-            Console.ReadKey();
             App = Application.Attach(uiJob.ProcessID);
-            using (Auto = new UIA3Automation())
+            using (Auto = new UIA2Automation())
             {
                 var mainWin = App.GetMainWindow(Auto);
-                Console.WriteLine($"Главное окно - {mainWin.Name}");
-                var elem = mainWin.FindFirstByXPath("/Pane[@Name='Область инструментов']/Pane[@Name='Навигатор']");
-                Console.WriteLine($"{elem.Name}");
-                var gl = elem.FindFirst(TreeScope.Children, elem.ConditionFactory.ByName("Навигатор:Главное представление"));
-                Console.WriteLine($"{gl.Name}");
-                var pane = gl.FindFirstByXPath("/Pane/Pane");
-                var tree = pane.FindFirstChild(gl.ConditionFactory.ByControlType(ControlType.Tree)).AsTree();
-                var tiShorts = tree.Items.FirstOrDefault(i => i.Name.StartsWith("Быстрые ссылки"));
-                Console.WriteLine($"{tiShorts.Name}");
-                tiShorts.Expand();
-                var tiNets = tiShorts.Items.FirstOrDefault(i => i.Name.StartsWith("Трубопроводные сети"));
-                Console.WriteLine($"{tiNets.Name}");
-                tiNets.Expand();
-                foreach (var item in tiNets.Items)
-                {
-                    Console.WriteLine($"Вставка быстрой ссылки {item.Name}");
-                    item.Select();
-                    item.RightClick();
-                    Mouse.MoveBy(50, 5);
-                    Mouse.Click(MouseButton.Left);
-                    while (true)
-                    {
-                        var winLink = mainWin.ModalWindows.FirstOrDefault(w => w.Name == "Создать ссылку трубопроводной сети");
-                        if (winLink == null)
-                        {
-                            Thread.Sleep(100);
-                            continue;
-                        }
-
-                        var bOk = winLink.FindFirstByXPath("/Button[@Name='OK']").AsButton();
-                        bOk.Click();
-                        App.WaitWhileBusy();
-                        Thread.Sleep(3000);
-                        break;
-                    }
-                }
-
-                Console.ReadKey();
-
-                //uiJob.Container.Automate(mainWin);
+                uiJob.Container.Automate(mainWin);
             }
         }
 

@@ -1,10 +1,10 @@
 ﻿namespace UIAutomationUtils.Data
 {
     using System;
-    using System.Diagnostics;
     using System.Linq;
     using System.Threading;
     using FlaUI.Core.AutomationElements;
+    using FlaUI.Core.Definitions;
     using JetBrains.Annotations;
     using NLog;
 
@@ -41,8 +41,15 @@
 
                     if (win == null)
                     {
+                        win = window.FindFirstChild(window.ConditionFactory.ByControlType(ControlType.Window)
+                            .And(window.ConditionFactory.ByName(Name)))?.AsWindow();
+                    }
+
+                    if (win == null)
+                    {
                         win = UIProgram.App.GetAllTopLevelWindows(UIProgram.Auto).FirstOrDefault(w => w.Title == Name);
                     }
+
                     if (win != null)
                         return win;
                 }
