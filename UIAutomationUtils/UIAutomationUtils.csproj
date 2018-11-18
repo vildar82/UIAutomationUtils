@@ -103,7 +103,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="NetLib" version="1.1.14" />
+    <PackageReference Include="NetLib">
+      <version>1.1.67</version>
+    </PackageReference>
     <PackageReference Include="Castle.Core">
       <Version>4.3.1</Version>
     </PackageReference>
@@ -117,8 +119,11 @@
       <Version>2.0.0-rc1</Version>
     </PackageReference>
     <PackageReference Include="ToString.Fody">
-      <Version>1.10.4</Version>
+      <Version>1.10.5</Version>
     </PackageReference>
+    <PackageReference Update="Nerdbank.GitVersioning" Version="2.2.33" />
+    <PackageReference Update="Fody" Version="3.3.0" />
+    <PackageReference Update="PropertyChanged.Fody" Version="2.5.14" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="read.txt" />
