@@ -9,7 +9,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>UIAutomationUtils</RootNamespace>
     <AssemblyName>UIAutomationUtils</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
@@ -38,7 +38,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <DocumentationFile>bin\Release\UIAutomationUtils.xml</DocumentationFile>
-    <LangVersion>latest</LangVersion>
+    <LangVersion>8</LangVersion>
     <ShouldCreateLogs>True</ShouldCreateLogs>
     <AdvancedSettingsExpanded>False</AdvancedSettingsExpanded>
     <UpdateAssemblyVersion>True</UpdateAssemblyVersion>
@@ -121,9 +121,6 @@
     <PackageReference Include="ToString.Fody">
       <Version>1.10.5</Version>
     </PackageReference>
-    <PackageReference Update="Nerdbank.GitVersioning" Version="2.2.33" />
-    <PackageReference Update="Fody" Version="3.3.0" />
-    <PackageReference Update="PropertyChanged.Fody" Version="2.5.14" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="read.txt" />
@@ -131,10 +128,10 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>if $(ConfigurationName) == Debug (
-  xcopy "$(ProjectDir)bin\Debug" "c:\Autodesk\AutoCAD\Pik\Settings\Script\NET\ГП_Тест\UIAutomation" /Y /C /Q
+  xcopy "$(ProjectDir)bin\Debug" "c:\Autodesk\AutoCAD\Pik\Settings\Script\NET\ГП\UIAutomation" /Y /C /Q
 )
 else if $(ConfigurationName) == Release (
-  xcopy "$(ProjectDir)bin\Release" "c:\Autodesk\AutoCAD\Pik\Settings\Script\NET\ГП_Тест\UIAutomation" /Y /C /Q
+  xcopy "$(ProjectDir)bin\Release" "c:\Autodesk\AutoCAD\Pik\Settings\Script\NET\ГП\UIAutomation" /Y /C /Q
 )</PostBuildEvent>
   </PropertyGroup>
 </Project>
